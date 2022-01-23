@@ -17,6 +17,7 @@ from youtubesearchpython import SearchVideos
 from SkyzuRobot.utils.pluginhelper import get_text, progress
 from SkyzuRobot import pbot, arq
 
+
 async def lyrics_func(answers, text):
     song = await arq.lyrics(text)
     if not song.ok:
@@ -24,9 +25,7 @@ async def lyrics_func(answers, text):
             InlineQueryResultArticle(
                 title="Error",
                 description=song.result,
-                input_message_content=InputTextMessageContent(
-                    song.result
-                ),
+                input_message_content=InputTextMessageContent(song.result),
             )
         )
         return answers
@@ -80,9 +79,7 @@ def download_youtube_audio(url: str):
             os.remove(audio_file)
             audio_file = audio_file_opus
         thumbnail_url = info_dict["thumbnail"]
-        thumbnail_file = (
-            basename + "." + get_file_extension_from_url(thumbnail_url)
-        )
+        thumbnail_file = basename + "." + get_file_extension_from_url(thumbnail_url)
         title = info_dict["title"]
         performer = info_dict["uploader"]
         duration = int(float(info_dict["duration"]))
@@ -127,12 +124,10 @@ async def ytmusic(client, message: Message):
         with YoutubeDL(opts) as ytdl:
             infoo = ytdl.extract_info(url, False)
             duration = round(infoo["duration"] / 60)
-            LIMIT = "180"          
- 
+            LIMIT = "180"
+
             if duration > LIMIT:
-                await pablo.edit(
-                    f"❌ **durasinya kelamaan gabisa banh**"
-                )
+                await pablo.edit(f"❌ **durasinya kelamaan gabisa banh**")
                 is_downloading = False
                 return
             ytdl_data = ytdl.extract_info(url, download=True)
