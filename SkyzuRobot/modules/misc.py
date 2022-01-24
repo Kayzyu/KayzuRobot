@@ -35,7 +35,6 @@ from SkyzuRobot.modules.helper_funcs.alternate import send_action, typing_action
 from SkyzuRobot.modules.language import gs
 
 
-
 @user_admin
 def echo(update: Update, context: CallbackContext):
     args = update.effective_message.text.split(None, 1)
@@ -54,13 +53,11 @@ def echo(update: Update, context: CallbackContext):
 
 def markdown_help_sender(update: Update):
     chat = update.effective_chat
-    update.effective_message.reply_text(text=gs(chat.id, "MARKDOWN_HELP"), parse_mode=ParseMode.HTML)
     update.effective_message.reply_text(
-        text=gs(chat.id, "MARKDOWN_HELP_TEXT_1")
+        text=gs(chat.id, "MARKDOWN_HELP"), parse_mode=ParseMode.HTML
     )
-    update.effective_message.reply_text(
-        text=gs(chat.id, "MARKDOWN_HELP_TEXT_2")
-    )
+    update.effective_message.reply_text(text=gs(chat.id, "MARKDOWN_HELP_TEXT_1"))
+    update.effective_message.reply_text(text=gs(chat.id, "MARKDOWN_HELP_TEXT_2"))
 
 
 def markdown_help(update: Update, context: CallbackContext):
@@ -163,8 +160,10 @@ def wall(update: Update, context: CallbackContext):
 def helps(chat):
     return gs(chat, "extras_help")
 
+
 ECHO_HANDLER = DisableAbleCommandHandler(
-    "echo", echo, filters=Filters.chat_type.groups, run_async=True)
+    "echo", echo, filters=Filters.chat_type.groups, run_async=True
+)
 MD_HELP_HANDLER = CommandHandler("markdownhelp", markdown_help, run_async=True)
 WIKI_HANDLER = DisableAbleCommandHandler("wiki", wiki)
 WALLPAPER_HANDLER = DisableAbleCommandHandler("wall", wall, run_async=True)

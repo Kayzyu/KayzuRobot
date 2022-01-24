@@ -316,6 +316,7 @@ def weebify(update: Update, context: CallbackContext):
 def helps(chat):
     return gs(chat, "fun_help")
 
+
 SANITIZE_HANDLER = DisableAbleCommandHandler("sanitize", sanitize, run_async=True)
 RUNS_HANDLER = DisableAbleCommandHandler("runs", runs, run_async=True)
 SLAP_HANDLER = DisableAbleCommandHandler("slap", slap, run_async=True)
